@@ -1,5 +1,6 @@
 #include "Field.h"
 #include "Fruit.h"
+#include "Snake.h"
 
 Field::Field(std::ostream& o, int h, int w, char border) : out(o), height(h), width(w), border_symbol(border)
 {
@@ -22,10 +23,17 @@ void Field::print()
 	}
 }
 
-void Field::set_fruit(Fruit& fruit)
+void Field::draw_fruit(Fruit& fruit)
 {
 	fruit.calculate_coordinates(width - 1, height - 1);
 	field[fruit.get_x()][fruit.get_y()] = fruit.get_symbol();
+}
+
+void Field::draw_snake(Snake& snake)
+{
+	std::vector<Link> snake_body = snake.get_body();
+	for (const auto& link : snake_body)
+		field[link.x][link.y] = link.symbol;
 }
 
 void Field::set_horizontal_borders()

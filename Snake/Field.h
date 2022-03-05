@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 
+class Snake;
 class Fruit;
 
 class Field
@@ -20,7 +21,8 @@ public:
 	Field(std::ostream& o, int h = 20, int w = 20, char border = '#');
 
 	void print();
-	void set_fruit(Fruit &fruit);
+	void draw_fruit(Fruit &fruit);
+	void draw_snake(Snake& snake);
 private:
 	void set_horizontal_borders();
 	void set_vertical_borders();
