@@ -2,7 +2,7 @@
 #include "Fruit.h"
 #include "Snake.h"
 
-Field::Field(std::ostream& o, int h, int w, char border) : out(o), height(h), width(w), border_symbol(border)
+Field::Field(int h, int w, char border) : height(h), width(w), border_symbol(border)
 {
 	field.resize(height);
 	for (auto& row : field)
@@ -11,25 +11,13 @@ Field::Field(std::ostream& o, int h, int w, char border) : out(o), height(h), wi
 	set_vertical_borders();
 }
 
-void Field::print()
-{
-	for (int j = 0; j < height; ++j)
-	{
-		for (int i = 0; i < width; ++i)
-		{
-			out << field[i][j];
-		}
-		out << "\n";
-	}
-}
-
-void Field::draw_fruit(Fruit& fruit)
+void Field::set_fruit_coordinates(Fruit& fruit)
 {
 	fruit.calculate_coordinates(width - 1, height - 1);
 	field[fruit.get_x()][fruit.get_y()] = fruit.get_symbol();
 }
 
-void Field::draw_snake(Snake& snake)
+void Field::set_snake_coordinates(Snake& snake)
 {
 	std::vector<Link> snake_body = snake.get_body();
 	for (const auto& link : snake_body)
