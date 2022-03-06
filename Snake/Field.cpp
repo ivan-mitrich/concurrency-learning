@@ -13,7 +13,6 @@ Field::Field(int h, int w, char border) : height(h), width(w), border_symbol(bor
 
 void Field::set_fruit_coordinates(Fruit& fruit)
 {
-	fruit.calculate_coordinates(width - 1, height - 1);
 	field[fruit.get_x()][fruit.get_y()] = fruit.get_symbol();
 }
 
@@ -21,7 +20,7 @@ void Field::set_snake_coordinates(Snake& snake)
 {
 	std::vector<Link> snake_body = snake.get_body();
 	for (const auto& link : snake_body)
-		field[link.x][link.y] = link.symbol;
+		field[link.y][link.x] = link.symbol;
 }
 
 void Field::set_horizontal_borders()
@@ -30,6 +29,17 @@ void Field::set_horizontal_borders()
 	{
 		field[i][0] = '#';
 		field[i][height - 1] = '#';
+	}
+}
+
+void Field::update_inner_region()
+{
+	for (int i = 1; i < width-1; ++i)
+	{
+		for (int j = 1; j < height-1; ++j)
+		{
+			field[i][j] = ' ';
+		}
 	}
 }
 

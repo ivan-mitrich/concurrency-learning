@@ -20,6 +20,7 @@ public:
 
 	void set_fruit_coordinates(Fruit &fruit);
 	void set_snake_coordinates(Snake& snake);
+	void update_inner_region();
 
 	int get_width() const { return width; }
 	int get_height() const { return height; }
