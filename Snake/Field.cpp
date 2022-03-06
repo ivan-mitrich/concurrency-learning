@@ -13,7 +13,7 @@ Field::Field(int h, int w, char border) : height(h), width(w), border_symbol(bor
 
 void Field::set_fruit_coordinates(Fruit& fruit)
 {
-	field[fruit.get_x()][fruit.get_y()] = fruit.get_symbol();
+	field[fruit.get_y()][fruit.get_x()] = fruit.get_symbol();
 }
 
 void Field::set_snake_coordinates(Snake& snake)
@@ -27,16 +27,16 @@ void Field::set_horizontal_borders()
 {
 	for (int i = 0; i < width; ++i)
 	{
-		field[i][0] = '#';
-		field[i][height - 1] = '#';
+		field[0][i] = '#';
+		field[height - 1][i] = '#';
 	}
 }
 
 void Field::update_inner_region()
 {
-	for (int i = 1; i < width-1; ++i)
+	for (int i = 1; i < height-1; ++i)
 	{
-		for (int j = 1; j < height-1; ++j)
+		for (int j = 1; j < width-1; ++j)
 		{
 			field[i][j] = ' ';
 		}
@@ -47,7 +47,7 @@ void Field::set_vertical_borders()
 {
 	for (int j = 0; j < height; ++j)
 	{
-		field[0][j] = '#';
-		field[width - 1][j] = '#';
+		field[j][0] = '#';
+		field[j][width - 1] = '#';
 	}
 }
