@@ -18,5 +18,9 @@ public:
 
 private:
 	void redraw_screen();
+	void update_field();
+	void check_collisions();
+
+	void check_snake_border_collision();
 };
 
