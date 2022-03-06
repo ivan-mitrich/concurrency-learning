@@ -11,7 +11,7 @@ private:
 public:
 	Fruit(char symbol = 'F');
 
-	void calculate_coordinates(int max_x_coord, int max_y_coord);
+	void recalculate_coordinates(int max_x_coord, int max_y_coord);
 	int get_x() const { return x; }
 	int get_y() const { return y; }
 	char get_symbol() const { return fruit_symbol; }
