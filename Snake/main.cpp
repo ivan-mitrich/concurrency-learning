@@ -1,14 +1,8 @@
 #include <iostream>
-#include "Field.h"
-#include "Fruit.h"
-#include "Snake.h"
+#include "Game.h"
 
 int main() {
-	Fruit fruit;
-	Snake snake;
-	Field field(std::cout);
-	field.draw_fruit(fruit);
-	field.draw_snake(snake);
-	field.print();
+	Game game;
+	game.start_game();
 	return 0;
 }
