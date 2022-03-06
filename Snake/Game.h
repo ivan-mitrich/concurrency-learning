@@ -22,5 +22,6 @@ private:
 	void check_collisions();
 
 	void check_snake_border_collision();
+	void check_snake_fruit_collision();
 };
 

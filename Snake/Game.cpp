@@ -49,7 +49,7 @@ void Game::update_field()
 void Game::check_collisions()
 {
 	check_snake_border_collision();
-
+	check_snake_fruit_collision();
 }
 
 void Game::check_snake_border_collision()
@@ -77,4 +77,21 @@ void Game::check_snake_border_collision()
 		snake.reset_head_y(1);
 	}
 
+}
+
+void Game::check_snake_fruit_collision()
+{
+	int fruit_x = fruit.get_x();
+	int fruit_y = fruit.get_y();
+	int snake_x = snake.get_head_x();
+	int snake_y = snake.get_head_y();
+
+	//std::cout << "\n" << fruit_x << " " << fruit_y << "\n";
+	std::cout << "\n" << snake_x << " " << snake_y << "\n";
+
+	if (snake_x == fruit_x && snake_y == fruit_y)
+	{
+		fruit_eaten = true;
+		snake.add_link();
+	}
 }
