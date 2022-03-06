@@ -43,6 +43,16 @@ void Snake::process_input()
 	}
 }
 
+void Snake::reset_head_x(int new_x)
+{
+	body[0].x = new_x;
+}
+
+void Snake::reset_head_y(int new_y)
+{
+	body[0].y = new_y;
+}
+
 void Snake::update_tail_position()
 {
 	for (std::size_t i = 1; i < body.size(); ++i)

@@ -18,6 +18,9 @@ private:
 public:
 	Snake();
 
+	void reset_head_x(int new_x);
+	void reset_head_y(int new_y);
+
 	void process_input();
 	void set_initial_head_position(int i, int j);
 	void add_link();
