@@ -1,6 +1,7 @@
 #include "Game.h"
 #include <cstdlib>
 #include <thread>
+
 Game::Game() : game_over(false), fruit_eaten(true), score(0)
 {
 	snake.set_initial_head_position(field.get_width() / 2 - 1, field.get_height() / 2 - 1);
@@ -8,11 +9,16 @@ Game::Game() : game_over(false), fruit_eaten(true), score(0)
 
 void Game::start_game()
 {
+	std::thread user_input_thread(&Game::user_input_loop, this);
+	
 	while (!game_over)
 	{
-		process_input();
-		redraw_screen();		
+		snake.move_snake();
+		redraw_screen();
 	}
+
+	user_input_thread.join();
+
 	print_score();
 }
 
@@ -117,17 +123,34 @@ void Game::print_score()
 	std::cout << "Your score : " << score << std::endl;
 }
 
-void Game::process_input()
+void Game::process_user_input()
 {
-	snake.process_input();
 	if (_kbhit())
 	{
-		switch (_getch())
+		int key = _getch();
+		switch (key)
 		{
+		case 'p':
+			snake.pause_moving();
+			break;
+		case 'c':
+			snake.continue_moving();
+			break;
 		case 'x':
 			game_over = true;
+			break;
+		default:
+			snake.process_input(key);
 			break;
 		}
 	}
 	
+}
+
+void Game::user_input_loop()
+{
+	while (!game_over)
+	{
+		process_user_input();
+	}
 }

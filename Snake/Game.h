@@ -29,6 +29,7 @@ private:
 
 	void print_score();
 
-	void process_input();
+	void process_user_input();
+	void user_input_loop();
 };
 

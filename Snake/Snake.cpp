@@ -9,6 +9,8 @@ Snake::Snake()
 	saved_move_direction = Direction::STOP;
 }
 
+
+
 void Snake::set_initial_head_position(int i, int j)
 {
 	body[0].x = i;
@@ -21,33 +23,23 @@ void Snake::add_link()
 	body.push_back(new_link);
 }
 
-void Snake::process_input()
+void Snake::process_input(int key)
 {
-	if (_kbhit())
+	switch (key)
 	{
-		switch (_getch())
-		{
-		case 'a':
-			move_direction = Direction::LEFT;
-			break;
-		case 'd':
-			move_direction = Direction::RIGHT;
-			break;
-		case 'w':
-			move_direction = Direction::TOP;
-			break;
-		case 's':			
-			move_direction = Direction::BOTTOM;
-			break;
-		case 'p':
-			stop_moving();
-			break;
-		case 'c':
-			continue_moving();
-			break;
-		}		
+	case 'a':
+		move_direction = Direction::LEFT;
+		break;
+	case 'd':
+		move_direction = Direction::RIGHT;
+		break;
+	case 'w':
+		move_direction = Direction::TOP;
+		break;
+	case 's':
+		move_direction = Direction::BOTTOM;
+		break;
 	}
-	move_snake();
 }
 
 void Snake::move_snake() {
@@ -87,7 +79,7 @@ void Snake::reset_head_y(int new_y)
 	body[0].y = new_y;
 }
 
-void Snake::stop_moving()
+void Snake::pause_moving()
 {
 	saved_move_direction = move_direction;
 	move_direction = Direction::STOP;

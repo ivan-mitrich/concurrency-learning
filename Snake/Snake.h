@@ -34,15 +34,16 @@ public:
 	void reset_head_x(int new_x);
 	void reset_head_y(int new_y);
 
-	void process_input();
+	void process_input(int key);
 	void set_initial_head_position(int i, int j);
 	void add_link();
 	const std::vector<Link>& get_body() const { return body; }
 	
 	int get_head_x() const { return body[0].x; }
 	int get_head_y() const { return body[0].y; }
-
-	void stop_moving();
+	
+	void move_snake();
+	void pause_moving();
 	void continue_moving();
 
 private:
@@ -54,8 +55,6 @@ private:
 	//the same with move bottom.
 	void move_top() { --body[0].y; } 
 	void move_bottom() { ++body[0].y; }
-
-	void move_snake();
 
 	void update_tail_position();
 	void save_previous_tail_position();
