@@ -1,6 +1,7 @@
 #include "Game.h"
 #include <cstdlib>
 #include <thread>
+#include <Windows.h>
 
 Game::Game() : game_over(false), fruit_eaten(true), score(0)
 {
@@ -9,6 +10,8 @@ Game::Game() : game_over(false), fruit_eaten(true), score(0)
 
 void Game::start_game()
 {
+	display_help();
+
 	std::thread user_input_thread(&Game::user_input_loop, this);
 	
 	while (!game_over)
@@ -24,7 +27,9 @@ void Game::start_game()
 
 void Game::redraw_screen()
 {
-	std::system("cls");
+	const int HELP_ROWS_AMOUNT = 9;
+	COORD cur = { 0, HELP_ROWS_AMOUNT };
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cur);
 		
 	check_collisions();
 	update_field();
@@ -153,4 +158,16 @@ void Game::user_input_loop()
 	{
 		process_user_input();
 	}
+}
+
+void Game::display_help()
+{
+	std::cout << "============ SNAKE GAME ============" << "\n";
+	std::cout << "  Keyboard input: " << "\n";
+	std::cout << "     *w,a,s,d - move snake;" << "\n";
+	std::cout << "     *p - pause game;" << "\n";
+	std::cout << "     *c - continue game;" << "\n";
+	std::cout << "     *x - exit game;" << "\n";
+	std::cout << "  Tip: don't let snake eat itself!" << "\n";
+	std::cout << "============ Good Luck! ============" << "\n";
 }

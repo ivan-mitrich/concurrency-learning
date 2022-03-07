@@ -17,6 +17,7 @@ private:
 public:
 	Game();
 	void start_game();
+	void display_help();
 
 private:
 	void redraw_screen();
