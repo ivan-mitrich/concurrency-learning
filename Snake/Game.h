@@ -12,6 +12,8 @@ private:
 
 	bool game_over;
 	bool fruit_eaten;
+
+	int score;
 public:
 	Game();
 	void start_game();
@@ -23,5 +25,8 @@ private:
 
 	void check_snake_border_collision();
 	void check_snake_fruit_collision();
+	void check_snake_snake_collision();
+
+	void print_score();
 };
 

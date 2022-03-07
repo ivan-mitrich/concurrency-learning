@@ -1,7 +1,7 @@
 #include "Game.h"
 #include <cstdlib>
 #include <thread>
-Game::Game() : game_over(false), fruit_eaten(true)
+Game::Game() : game_over(false), fruit_eaten(true), score(0)
 {
 	snake.set_initial_head_position(field.get_width() / 2 - 1, field.get_height() / 2 - 1);
 }
@@ -11,9 +11,9 @@ void Game::start_game()
 	while (!game_over)
 	{
 		snake.process_input();
-		redraw_screen();
-		
+		redraw_screen();		
 	}
+	print_score();
 }
 
 void Game::redraw_screen()
@@ -50,6 +50,7 @@ void Game::check_collisions()
 {
 	check_snake_border_collision();
 	check_snake_fruit_collision();
+	check_snake_snake_collision();
 }
 
 void Game::check_snake_border_collision()
@@ -86,12 +87,32 @@ void Game::check_snake_fruit_collision()
 	int snake_x = snake.get_head_x();
 	int snake_y = snake.get_head_y();
 
-	//std::cout << "\n" << fruit_x << " " << fruit_y << "\n";
-	std::cout << "\n" << snake_x << " " << snake_y << "\n";
-
 	if (snake_x == fruit_x && snake_y == fruit_y)
 	{
 		fruit_eaten = true;
 		snake.add_link();
+		++score;
 	}
+}
+
+void Game::check_snake_snake_collision()
+{
+	auto snake_body = snake.get_body();
+	for (size_t i = 0; i < snake_body.size()-1; ++i)
+	{
+		for (size_t j = i + 1; j < snake_body.size(); ++j)
+		{
+			if (snake_body[i].x == snake_body[j].x && snake_body[i].y == snake_body[j].y)
+			{
+				game_over = true;
+				return;
+			}
+		}
+	}
+}
+
+void Game::print_score()
+{
+	std::cout << "GAME OVER" << std::endl;
+	std::cout << "Your score : " << score << std::endl;
 }
