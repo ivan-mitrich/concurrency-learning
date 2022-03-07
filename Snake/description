@@ -2,4 +2,4 @@ CLASS STRUCTURE:
 - Snake - represents snake geometry, drawing symbols and handles its movement.
 - Fruit - represents goal object for snake. Handles position and drawing symbol.
 - Field - represents game field as 2D symbols vector. 
-- Game - main class that handles gameplay collisions and draw field symbols vector.
+- Game - main class that handles gameplay collisions and draws field symbols vector.
