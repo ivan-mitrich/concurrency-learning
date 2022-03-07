@@ -28,5 +28,7 @@ private:
 	void check_snake_snake_collision();
 
 	void print_score();
+
+	void process_input();
 };
 

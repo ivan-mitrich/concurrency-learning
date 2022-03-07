@@ -10,7 +10,7 @@ void Game::start_game()
 {
 	while (!game_over)
 	{
-		snake.process_input();
+		process_input();
 		redraw_screen();		
 	}
 	print_score();
@@ -115,4 +115,19 @@ void Game::print_score()
 {
 	std::cout << "GAME OVER" << std::endl;
 	std::cout << "Your score : " << score << std::endl;
+}
+
+void Game::process_input()
+{
+	snake.process_input();
+	if (_kbhit())
+	{
+		switch (_getch())
+		{
+		case 'x':
+			game_over = true;
+			break;
+		}
+	}
+	
 }
