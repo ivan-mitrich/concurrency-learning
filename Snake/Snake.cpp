@@ -39,27 +39,37 @@ void Snake::process_input()
 		case 's':			
 			move_direction = Direction::BOTTOM;
 			break;
+		case 'p':
+			stop_moving();
+			break;
+		case 'c':
+			continue_moving();
+			break;
 		}		
 	}
 	move_snake();
 }
 
 void Snake::move_snake() {
-	update_tail_position();
+	
 	switch (move_direction)
 	{
 	case Direction::STOP:
 		break;
 	case Direction::LEFT:		
+		update_tail_position();
 		move_left();
 		break;
 	case Direction::RIGHT:
+		update_tail_position();
 		move_right();
 		break;
 	case Direction::TOP:
+		update_tail_position();
 		move_top();
 		break;
 	case Direction::BOTTOM:
+		update_tail_position();
 		move_bottom();
 		break;
 	default:
@@ -85,7 +95,8 @@ void Snake::stop_moving()
 
 void Snake::continue_moving()
 {
-	move_direction = saved_move_direction;
+	if(move_direction == Direction::STOP)
+		move_direction = saved_move_direction;
 }
 
 void Snake::save_previous_tail_position()
