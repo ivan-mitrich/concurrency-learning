@@ -15,6 +15,9 @@ class Snake
 private:
 	std::vector<Link> body;
 
+	int previous_tail_x;
+	int previous_tail_y;
+
 public:
 	Snake();
 
@@ -40,6 +43,6 @@ private:
 	void move_bottom() { ++body[0].y; }
 
 	void update_tail_position();
-
+	void save_previous_tail_position();
 };
 

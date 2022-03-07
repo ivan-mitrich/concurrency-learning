@@ -15,8 +15,7 @@ void Snake::set_initial_head_position(int i, int j)
 
 void Snake::add_link()
 {
-	Link tail = body[body.size() - 1];
-	Link new_link(tail.x, tail.y, 'o');
+	Link new_link(previous_tail_x, previous_tail_y, 'o');
 	body.push_back(new_link);
 }
 
@@ -27,19 +26,22 @@ void Snake::process_input()
 		switch (_getch())
 		{
 		case 'a':
+			update_tail_position();
 			move_left();
 			break;
 		case 'd':
+			update_tail_position();
 			move_right();
 			break;
 		case 'w':
+			update_tail_position();
 			move_top();
 			break;
 		case 's':
+			update_tail_position();
 			move_bottom();
 			break;
-		}
-		update_tail_position();
+		}		
 	}
 }
 
@@ -53,9 +55,16 @@ void Snake::reset_head_y(int new_y)
 	body[0].y = new_y;
 }
 
+void Snake::save_previous_tail_position()
+{
+	previous_tail_x = body[body.size() - 1].x;
+	previous_tail_y = body[body.size() - 1].y;
+}
+
 void Snake::update_tail_position()
 {
-	for (std::size_t i = 1; i < body.size(); ++i)
+	save_previous_tail_position();
+	for (std::size_t i = body.size() - 1; i > 0; --i)
 	{
 		body[i].x = body[i - 1].x;
 		body[i].y = body[i - 1].y;
