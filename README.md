@@ -1,2 +1,3 @@
 # concurrency-learning
-here I publish my programs where I try to implement some concurrency concepts
+Here you can find next projects:
+- Snake - simple snake game.
