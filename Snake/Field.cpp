@@ -19,8 +19,11 @@ void Field::set_fruit_coordinates(Fruit& fruit)
 void Field::set_snake_coordinates(Snake& snake)
 {
 	std::vector<Link> snake_body = snake.get_body();
+	
 	for (const auto& link : snake_body)
+	{
 		field[link.y][link.x] = link.symbol;
+	}
 }
 
 void Field::set_horizontal_borders()
