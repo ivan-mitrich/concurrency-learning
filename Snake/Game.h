@@ -17,9 +17,11 @@ private:
 public:
 	Game();
 	void start_game();
-	void display_help();
+	
 
 private:
+	void display_help();
+	
 	void redraw_screen();
 	void update_field();
 	void check_collisions();
