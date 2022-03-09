@@ -18,6 +18,8 @@ void Game::start_game()
 	while (!game_over)
 	{
 		process_user_input();
+		spawner.spawn_obstacle();
+		player_car.move();
 		redraw_screen();
 	}
 
@@ -93,6 +95,14 @@ void Game::user_input_loop()
 	while (!game_over)
 	{
 		process_user_input();
+	}
+}
+
+void Game::spawning_obstacles_loop()
+{
+	while (!game_over)
+	{
+		spawner.spawn_obstacle();
 	}
 }
 

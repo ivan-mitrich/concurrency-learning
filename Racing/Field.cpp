@@ -77,3 +77,21 @@ void Field::set_car_on_field(const Car& car)
 		}
 	}
 }
+
+void Field::set_obstacle_on_field(const RoadObject& obstacle)
+{
+	auto obstacle_body = obstacle.get_body();
+	int obstacle_x = obstacle.get_x_position();
+	int obstacle_y = obstacle.get_y_position();
+
+	for (size_t i = 0; i < obstacle_body.size(); ++i)
+	{
+		for (size_t j = 0; j < obstacle_body[i].size(); ++j)
+		{
+			int y_coordinate = obstacle_y + i;
+			int x_coordinate = obstacle_x + j;
+			if(y_coordinate < height)
+				field[y_coordinate][x_coordinate] = obstacle_body[i][j];
+		}
+	}
+}

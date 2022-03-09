@@ -19,6 +19,6 @@ public:
 
 private:
 	static int get_random_int_in_range(int min, int max);
-	bool is_x_position_possible(int x);
+	bool is_x_position_possible(int new_object_x, int new_object_width);
 };
 

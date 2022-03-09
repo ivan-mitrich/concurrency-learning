@@ -1,12 +1,14 @@
 #pragma once
 #include "Field.h"
 #include "Car.h"
+#include "ObstaclesSpawner.h"
 
 class Game
 {
 private:
 	Field field;
 	Car player_car;
+	ObstaclesSpawner spawner;
 
 	bool game_over;
 
@@ -25,5 +27,6 @@ private:
 
 	void process_user_input();
 	void user_input_loop();
+	void spawning_obstacles_loop();
 };
 
