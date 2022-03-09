@@ -61,7 +61,7 @@ void Field::update_road()
 
 void Field::set_car_on_field(const Car& car)
 {
-	auto car_body = car.get_car_body();
+	auto car_body = car.get_body();
 	int car_x = car.get_x_position();
 	int car_y = car.get_y_position();
 	int new_car_y = calculate_adjusted_y_car_position(car);

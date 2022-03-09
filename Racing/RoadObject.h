@@ -18,7 +18,7 @@ protected:
 public:
 	RoadObject(int h = 3, int w = 3, int speed_y = 1);
 
-	const std::vector<std::vector<char>>& get_car_body() const { return body.get_body(); }
+	const std::vector<std::vector<char>>& get_body() const { return body.get_body(); }
 	int get_x_position() const { return position_x; }
 	int get_y_position() const { return position_y; }
 	int get_width() const { return body.get_width(); }
