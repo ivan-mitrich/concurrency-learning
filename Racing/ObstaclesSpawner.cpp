@@ -15,7 +15,12 @@ void ObstaclesSpawner::spawn_obstacle()
 		RoadObject* obstacle = nullptr;
 		while (!obstacle)
 		{
-
+			int y_position = 0;
+			int x_position = get_random_int_in_range(min_x, max_x);
+			if (is_x_position_possible(x_position))
+			{
+				obstacle = new RoadObject;
+			}
 		}
 	}
 }
@@ -26,4 +31,13 @@ int ObstaclesSpawner::get_random_int_in_range(int min, int max)
 	std::mt19937                        generator(rand_dev());
 	std::uniform_int_distribution<int>  distribution(min, max);
 	return distribution(generator);
+}
+
+bool ObstaclesSpawner::is_x_position_possible(int x)
+{
+	for (const auto& obstacle : obstacles)
+	{
+		if(x > obstacle->get_x_position() + obstacle->get_width() )
+	}
+	return true;
 }

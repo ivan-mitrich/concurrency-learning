@@ -19,5 +19,6 @@ public:
 
 private:
 	static int get_random_int_in_range(int min, int max);
+	bool is_x_position_possible(int x);
 };
 
