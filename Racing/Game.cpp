@@ -5,8 +5,8 @@
 
 Game::Game() : game_over(false)
 {
-	player_car.set_car_x_position(field.get_width() / 2);
-	player_car.set_car_y_position(field.get_height() - player_car.get_car_height());
+	player_car.set_x_position(field.get_width() / 2);
+	player_car.set_y_position(field.get_height() - player_car.get_height());
 }
 
 void Game::start_game()

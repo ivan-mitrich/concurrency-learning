@@ -23,7 +23,7 @@ public:
 	int get_width() const { return width; }
 	int get_height() const { return height; }
 
-	void set_car_on_field(Car& car);
+	void set_car_on_field(const Car& car);
 
 	const std::vector<std::vector<char>>& get_field() const { return field; }
 

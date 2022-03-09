@@ -27,22 +27,22 @@ void Field::set_road_markers()
 
 int Field::calculate_adjusted_x_car_position(const Car& car)
 {
-	int car_x = car.get_car_x_position();
+	int car_x = car.get_x_position();
 	if (car_x < 1)
 		return 1;
-	else if (car_x > width - 1 - car.get_car_width())
-		return width - 1 - car.get_car_width();
+	else if (car_x > width - 1 - car.get_width())
+		return width - 1 - car.get_width();
 	else
 		return car_x;
 }
 
 int Field::calculate_adjusted_y_car_position(const Car& car)
 {
-	int car_y = car.get_car_y_position();
+	int car_y = car.get_y_position();
 	if (car_y < 0)
 		return 0;
-	else if (car_y > height - car.get_car_height())
-		return height - car.get_car_height();
+	else if (car_y > height - car.get_height())
+		return height - car.get_height();
 	else
 		return car_y;
 }
@@ -59,11 +59,11 @@ void Field::update_road()
 	set_road_markers();
 }
 
-void Field::set_car_on_field(Car& car)
+void Field::set_car_on_field(const Car& car)
 {
 	auto car_body = car.get_car_body();
-	int car_x = car.get_car_x_position();
-	int car_y = car.get_car_y_position();
+	int car_x = car.get_x_position();
+	int car_y = car.get_y_position();
 	int new_car_y = calculate_adjusted_y_car_position(car);
 	int new_car_x = calculate_adjusted_x_car_position(car);
 
