@@ -1,25 +1,47 @@
 #include "Car.h"
 
-Car::Car(int h, int w, char symbol) : body(h, w, symbol), position_x(0), position_y(-h + 1)
+Car::Car(int h, int w, int speed) : RoadObject(h, w, speed), direction(MoveDirection::STOP)
 {
 
 }
 
 void Car::process_input(int key)
-{
+{	
 	switch (key)
 	{
 	case 'a':
-		move_left();
+		direction = MoveDirection::LEFT;
 		break;
 	case 'd':
-		move_right();
+		direction = MoveDirection::RIGHT;
 		break;
 	case 'w':
-		move_forward();
+		direction = MoveDirection::FORWARD;
 		break;
 	case 's':
-		move_backward();
+		direction = MoveDirection::BACKWARD;
 		break;
 	}
+}
+
+void Car::move()
+{
+	switch (direction)
+	{
+	case MoveDirection::LEFT:
+		move_left();
+		break;
+	case MoveDirection::RIGHT:
+		move_right();
+		break;
+	case MoveDirection::FORWARD:
+		move_forward();
+		break;
+	case MoveDirection::BACKWARD:
+		move_backward();
+		break;
+	case MoveDirection::STOP:
+		break;
+	}
+	direction = MoveDirection::STOP;
 }
