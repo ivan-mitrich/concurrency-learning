@@ -31,6 +31,8 @@ public:
 	void spawn_obstacle();
 	const std::vector<RoadObject*>& get_obstacles() const { return obstacles; }
 
+	void remove_obstacle(RoadObject* obstacle);
+
 	void set_spawning_x_range(int min, int max);
 	void set_road_length(int length);
 	void set_obstacles_size_range(int min, int max);

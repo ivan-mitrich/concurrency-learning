@@ -1,6 +1,6 @@
 #pragma once
 #include "RoadObjectBody.h"
-
+#include <mutex>
 class RoadObject
 {
 private:
@@ -14,7 +14,7 @@ protected:
 	*/
 	int position_x;
 	int position_y;
-
+	//std::mutex mutex;
 public:
 	RoadObject(int h = 3, int w = 3, int speed_y = 1, char symbol = 'o');
 
@@ -28,6 +28,9 @@ public:
 	void set_x_position(int x) { position_x = x; }
 	void set_y_position(int y) { position_y = y; }
 
-	virtual void move() { position_y += speed_y; }
+	virtual void move() { 
+		//std::lock_guard<std::mutex> guard(mutex);
+		position_y += speed_y; 
+	}
 };
 

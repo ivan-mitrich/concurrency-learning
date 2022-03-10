@@ -1,6 +1,7 @@
 #include "ObstaclesSpawner.h"
 #include "RoadObject.h"
 #include <random>
+#include <algorithm>
 #include <iostream>
 ObstaclesSpawner::ObstaclesSpawner(int minimum_x, int maximum_x)
 {
@@ -27,6 +28,12 @@ void ObstaclesSpawner::spawn_obstacle()
 			obstacles.push_back(obstacle);
 		}
 	}
+}
+
+void ObstaclesSpawner::remove_obstacle(RoadObject* obstacle)
+{
+	obstacles.erase(std::remove(obstacles.begin(), obstacles.end(), obstacle), obstacles.end());
+	delete obstacle;
 }
 
 void ObstaclesSpawner::set_spawning_x_range(int min, int max)

@@ -2,6 +2,7 @@
 #include "Field.h"
 #include "Car.h"
 #include "ObstaclesSpawner.h"
+#include "Timer.h"
 
 class Game
 {
@@ -9,7 +10,9 @@ private:
 	Field field;
 	Car player_car;
 	ObstaclesSpawner spawner;
+	Timer timer;
 
+	bool paused;
 	bool game_over;
 
 	//int score;
@@ -30,7 +33,7 @@ private:
 
 	void process_user_input();
 	void user_input_loop();
-	void spawning_obstacles_loop();
+	void checking_collisions_loop();
 
 	void move_obstacles();
 	void draw_obstacles();
