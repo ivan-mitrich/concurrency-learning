@@ -23,6 +23,7 @@ public:
 	int get_y_position() const { return position_y; }
 	int get_width() const { return body.get_width(); }
 	int get_height() const { return body.get_height(); }
+	int get_speed() const { return speed_y; }
 
 	void set_x_position(int x) { position_x = x; }
 	void set_y_position(int y) { position_y = y; }
