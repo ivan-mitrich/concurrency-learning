@@ -9,8 +9,10 @@ private:
 
 	std::vector<std::vector<char>> body;
 
+	char body_symbol;
+
 public:
-	RoadObjectBody(int h = 3, int w = 3);
+	RoadObjectBody(int h = 3, int w = 3, char symbol = 'o');
 
 	const std::vector<std::vector<char>>& get_body() const { return body; }
 
