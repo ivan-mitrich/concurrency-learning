@@ -90,7 +90,7 @@ void Field::set_obstacle_on_field(const RoadObject& obstacle)
 		{
 			int y_coordinate = obstacle_y + i;
 			int x_coordinate = obstacle_x + j;
-			if(y_coordinate < height)
+			if(y_coordinate < height && y_coordinate >= 0)
 				field[y_coordinate][x_coordinate] = obstacle_body[i][j];
 		}
 	}

@@ -28,5 +28,8 @@ private:
 	void process_user_input();
 	void user_input_loop();
 	void spawning_obstacles_loop();
+
+	void move_obstacles();
+	void draw_obstacles();
 };
 
