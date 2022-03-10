@@ -12,6 +12,7 @@ Game::Game() : game_over(false)
 	spawner.set_obstacles_size_range(2, 3);
 	spawner.set_obstacles_speed_range(1, 2);
 	spawner.set_obstacles_symbols(std::vector<char>{'v', 'c', '$', '*', '9', '@', 'P'});
+	spawner.set_road_length(field.get_height());
 }
 
 void Game::start_game()
