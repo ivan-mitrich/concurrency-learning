@@ -66,7 +66,52 @@ void Game::update_field()
 
 void Game::check_collisions()
 {
+	auto obstacles = spawner.get_obstacles();
+	for (const auto& obstacle : obstacles)
+	{
+		check_car_obstacle_collision(obstacle);
+	}
+}
 
+void Game::check_car_obstacle_collision(const RoadObject const* object)
+{
+	int obstacle_x_min = object->get_x_position();
+	int obstacle_y_min = object->get_y_position();
+	int obstacle_x_max = obstacle_x_min + object->get_width();
+	int obstacle_y_max = obstacle_y_min + object->get_height();
+	int car_x_min = player_car.get_x_position();
+	int car_y_min = player_car.get_y_position();
+	int car_x_max = car_x_min + player_car.get_width();
+	int car_y_max = car_y_min + player_car.get_height();
+
+
+	bool has_x_intersection = has_dimension_intersection_between_objects(car_x_min, car_x_max, obstacle_x_min, obstacle_x_max, player_car.get_width() + object->get_width());
+
+	bool has_y_intersection = has_dimension_intersection_between_objects(car_y_min, car_y_max, obstacle_y_min, obstacle_y_max, player_car.get_height() + object->get_height());
+
+	if (has_x_intersection && has_y_intersection)
+	{
+		game_over = true;
+	}
+}
+
+bool Game::has_dimension_intersection_between_objects(int object1_min, int object1_max, int object2_min, int object2_max, int sum_leght)
+{
+	bool has_intersection = false;
+	int distance = 0;
+	if (object1_min < object2_min)
+	{
+		distance = object2_max - object1_min;
+	}
+	else
+	{
+		distance = object1_max - object2_min;
+	}
+	if (distance < sum_leght)
+	{
+		has_intersection = true;
+	}
+	return has_intersection;
 }
 
 void Game::print_score()

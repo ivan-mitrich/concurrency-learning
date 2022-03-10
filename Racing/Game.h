@@ -23,6 +23,9 @@ private:
 	void update_field();
 	void check_collisions();
 
+	void check_car_obstacle_collision(const RoadObject const *object);
+	bool has_dimension_intersection_between_objects(int object1_min, int object1_max, int object2_min, int object2_max, int sum_leght);
+
 	void print_score();
 
 	void process_user_input();
