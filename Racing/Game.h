@@ -40,13 +40,20 @@ private:
 	/* Called before game is started to print info how to drive the car with keyboard */
 	void display_help();
 	
+	/* Move all obstacles down the road*/
 	void move_obstacles();
+
+	/* Launch for each loop for each =) obstacle to check their collision with player car */
 	void check_collisions();
+
+	/* Call field update function and print field to console */
 	void redraw_screen();
 
-
-	void draw_obstacles();
+	/* Called every main game loop step to update field 2d array: place player car, obstacles and road marks in proper posions */
 	void update_field();
+
+	/* Called in update_field() function to put obstacles to field 2d array in correct position */
+	void draw_obstacles();
 	
 	/* Called in check collisions function for each obstacle to check if it intersect the player car */
 	void check_car_obstacle_collision(const RoadObject const *object);
