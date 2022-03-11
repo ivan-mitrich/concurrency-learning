@@ -15,7 +15,6 @@ private:
 	bool paused;
 	bool game_over;
 
-	//int score;
 public:
 	Game();
 	void start_game();
@@ -33,7 +32,6 @@ private:
 
 	void process_user_input();
 	void user_input_loop();
-	void checking_collisions_loop();
 
 	void move_obstacles();
 	void draw_obstacles();

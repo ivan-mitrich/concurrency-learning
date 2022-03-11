@@ -11,8 +11,8 @@ ObstaclesSpawner::ObstaclesSpawner(int minimum_x, int maximum_x)
 
 void ObstaclesSpawner::spawn_obstacle()
 {
-	int is_spawning_allowed = get_random_int_in_range(0, 3);
-	if (is_spawning_allowed != 0) 
+	int is_spawning_allowed = get_random_int_in_range(0, 1);
+	if (is_spawning_allowed) 
 	{
 		RoadObject* obstacle = nullptr;
 		

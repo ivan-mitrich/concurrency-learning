@@ -20,11 +20,11 @@ Game::Game() : paused(false), game_over(false)
 void Game::start_game()
 {
 	display_help();
-
-	std::thread user_input_thread(&Game::user_input_loop, this);
-	std::thread collision_thread(&Game::checking_collisions_loop, this);
 	
 	timer.reset();
+
+	std::thread user_input_thread(&Game::user_input_loop, this);	
+	
 	while (!game_over)
 	{
 		if (!paused)
@@ -32,12 +32,12 @@ void Game::start_game()
 			spawner.spawn_obstacle();
 			player_car.move();
 			move_obstacles();
+			check_collisions();
 			redraw_screen();
 		}
 	}
-
 	user_input_thread.join();
-	collision_thread.join();
+
 	print_score();
 }
 
@@ -47,7 +47,6 @@ void Game::redraw_screen()
 	COORD cur = { 0, HELP_ROWS_AMOUNT };
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cur);
 		
-	//check_collisions();
 	update_field();
 
 	auto field_symbols = field.get_field();	
@@ -70,10 +69,9 @@ void Game::update_field()
 
 void Game::check_collisions()
 {
-	//std::mutex m;
 	auto obstacles = spawner.get_obstacles();
 	for (const auto& obstacle : obstacles)
-	{		
+	{	
 		check_car_obstacle_collision(obstacle);
 	}
 
@@ -98,7 +96,7 @@ void Game::check_car_obstacle_collision(const RoadObject * object)
 
 	if (has_x_intersection && has_y_intersection)
 	{
-		//game_over = true;
+		game_over = true;
 	}
 }
 
@@ -126,7 +124,6 @@ void Game::print_score()
 	double time_spent = timer.elapsed();
 	std::cout << "\n======== GAME OVER ========" << std::endl;
 	std::cout << "You've lasted " << time_spent << " seconds in game!" << std::endl;
-	std::cout << "Obstacles amount " << spawner.get_obstacles().size()  << std::endl;
 }
 
 void Game::process_user_input()
@@ -150,34 +147,20 @@ void Game::process_user_input()
 			break;
 		}
 	}
-	
 }
 
 void Game::user_input_loop()
 {
-	//std::cout << std::this_thread::get_id() << std::endl;
 	while (!game_over)
 	{
 		process_user_input();
 	}
 }
 
-void Game::checking_collisions_loop()
-{
-	//std::cout << std::this_thread::get_id() << std::endl;
-	while (!game_over)
-	{
-		if (!paused)
-		{
-			check_collisions();
-		}
-	}
-}
-
 void Game::move_obstacles()
 {
 	auto obstacles = spawner.get_obstacles();
-	for (const auto& obstacle : obstacles)
+	for (auto& obstacle : obstacles)
 	{
 		obstacle->move();
 		if (obstacle->get_y_position() > field.get_height())
@@ -190,7 +173,6 @@ void Game::move_obstacles()
 void Game::draw_obstacles()
 {
 	auto obstacles = spawner.get_obstacles();
-	
 	for (const auto& obstacle : obstacles)
 	{
 		field.set_obstacle_on_field(*obstacle);
