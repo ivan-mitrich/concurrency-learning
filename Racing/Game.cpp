@@ -1,9 +1,10 @@
 #include "Game.h"
+#include <iostream>
 #include <conio.h>
 #include <thread>
 #include <mutex>
 #include <Windows.h>
-#include "Timer.h"
+
 
 Game::Game() : paused(false), game_over(false)
 {

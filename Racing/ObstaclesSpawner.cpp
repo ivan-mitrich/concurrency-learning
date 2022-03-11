@@ -2,7 +2,7 @@
 #include "RoadObject.h"
 #include <random>
 #include <algorithm>
-#include <iostream>
+
 ObstaclesSpawner::ObstaclesSpawner(int minimum_x, int maximum_x)
 {
 	const int APPROXIMATE_OBSTACLES_AMOUNT = 10;
@@ -101,7 +101,7 @@ bool ObstaclesSpawner::is_x_position_possible(int new_object_x, int new_object_s
 			
 			if( std::round(obstacles_speed_ratio) != 1.f )
 			{ 			
-				int y_distance = std::ceil(obstacles_speed_ratio * (settings.road_length - obstacle_y_coordinate));
+				int y_distance = (int)std::ceil(obstacles_speed_ratio * (settings.road_length - obstacle_y_coordinate));
 				if (obstacle->get_y_position() > y_distance)
 				{
 					continue;

@@ -9,8 +9,6 @@ Field::Field(int h, int w, char road_marks_symbol, char borders_symbol) : height
 		field[i][0] = road_borders_symbol;
 		field[i][width - 1] = road_borders_symbol;
 	}
-	//for (auto& row : field)
-		//row.resize(width, ' ');
 }
 
 void Field::set_road_markers()
