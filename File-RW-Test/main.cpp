@@ -7,7 +7,8 @@
 #include "FileHandle.h"
 
 void single_thread_function(const std::vector<double>& test_vector);
-void multiple_threads_function(const std::vector<double>& test_vector);
+void multiple_threads_function_mutex(const std::vector<double>& test_vector);
+void multiple_threads_function_cond_var(const std::vector<double>& test_vector);
 std::vector<double> create_test_vector();
 
 void print_consumed_time_wrapper(
@@ -20,8 +21,8 @@ int main()
 {
     std::vector<double> test_vector = create_test_vector();
     print_consumed_time_wrapper(test_vector, single_thread_function, "single thread function");
-    print_consumed_time_wrapper(test_vector, multiple_threads_function, "multiple thread function");
-
+    print_consumed_time_wrapper(test_vector, multiple_threads_function_mutex, "mutex multiple thread function");
+    print_consumed_time_wrapper(test_vector, multiple_threads_function_cond_var, "condition variable multiple thread function");
     return 0;
 }
 
@@ -42,7 +43,12 @@ void single_thread_function(const std::vector<double>& test_vector)
     std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 }
 
-void multiple_threads_function(const std::vector<double>& test_vector)
+void multiple_threads_function_mutex(const std::vector<double>& test_vector)
+{
+
+}
+
+void multiple_threads_function_cond_var(const std::vector<double>& test_vector)
 {
 
 }
