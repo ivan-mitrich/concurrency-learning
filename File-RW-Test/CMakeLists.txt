@@ -6,9 +6,13 @@ project(${PROJECT_NAME})
 
 add_executable(${PROJECT_NAME} main.cpp FileHandle.cpp)
 
-add_compile_options(-std=c++11 -pthread -lpthread -Wl,--no-as-needed -Wall -Wextra -Wshadow)
+#add_compile_options(-std=c++11 -pthread -lpthread -Wl,--no-as-needed -Wall -Wextra -Wshadow)
 
-
-set(CMAKE_CXX_FLAGS "-std=c++11 -pthread -lpthread -Wl,--no-as-needed -Wall -Wextra -Wshadow")
+if(MSVC)
+    add_compile_options("/W4")
+else()
+    add_compile_options("-std=c++11" "-pthread" "-lpthread" "-Wl,--no-as-needed" "-Wall" "-Wextra" "-Wshadow")
+endif()
+#set(CMAKE_CXX_FLAGS "-std=c++11 -pthread -lpthread -Wl,--no-as-needed -Wall -Wextra -Wshadow")
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
