@@ -3,10 +3,11 @@
 #include <random>
 
 const int simple_mutex::LOOP_COUNTER = 1000;
+const int simple_mutex::NOT_A_VALID_DATA = -111;
 bool simple_mutex::is_produced = false;
 bool simple_mutex::is_over = false;
 std::mutex simple_mutex::mutex;
-int simple_mutex::data_store;
+int simple_mutex::data_store = simple_mutex::NOT_A_VALID_DATA;
 
 void simple_mutex::producer_thread_function() {
 	for (int i = 0; i < simple_mutex::LOOP_COUNTER; ++i)
@@ -26,7 +27,7 @@ void simple_mutex::consumer_thread_function() {
 		if (simple_mutex::is_produced)
 		{		
 			int data = data_store;
-			data_store = -111;
+			data_store = simple_mutex::NOT_A_VALID_DATA;
 			simple_mutex::is_produced = false;
 			consume_data(data);
 		}

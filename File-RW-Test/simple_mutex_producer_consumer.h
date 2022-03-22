@@ -5,6 +5,7 @@
 
 namespace simple_mutex {
 	extern const int LOOP_COUNTER;
+	extern const int NOT_A_VALID_DATA;
 	
 	extern bool is_produced;
 	extern bool is_over;
