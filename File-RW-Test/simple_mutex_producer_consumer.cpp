@@ -12,10 +12,13 @@ int simple_mutex::data_store = simple_mutex::NOT_A_VALID_DATA;
 void simple_mutex::producer_thread_function() {
 	for (int i = 0; i < simple_mutex::LOOP_COUNTER; ++i)
 	{
-		std::this_thread::sleep_for(std::chrono::milliseconds(1));
-		std::unique_lock<std::mutex> lock(simple_mutex::mutex);
+		
+		//std::this_thread::sleep_for(std::chrono::milliseconds(1));
+		
+		
 		simple_mutex::data_store = simple_mutex::produce_data();
 		simple_mutex::is_produced = true;
+		std::unique_lock<std::mutex> lock(simple_mutex::mutex);
 	}
 	is_over = true;
 }
@@ -31,7 +34,6 @@ void simple_mutex::consumer_thread_function() {
 			simple_mutex::is_produced = false;
 			consume_data(data);
 		}
-		lock.unlock();
 		if (is_over)
 		{
 			break;
