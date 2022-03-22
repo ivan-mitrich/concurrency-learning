@@ -1,5 +1,6 @@
 #include <iostream>
 #include <thread>
+#include <mutex>
 #include <vector>
 #include <fstream>
 #include <chrono>
@@ -17,13 +18,50 @@ void print_consumed_time_wrapper(
         std::string wrapped_function_descr
         );
 
+std::mutex mutex;
+int counter = 0;
+const int LOOP_COUNTER = 10;
+void print_even();
+void print_odd();
+
 int main()
 {
-    std::vector<double> test_vector = create_test_vector();
+/*    std::vector<double> test_vector = create_test_vector();
     print_consumed_time_wrapper(test_vector, single_thread_function, "single thread function");
     print_consumed_time_wrapper(test_vector, multiple_threads_function_mutex, "mutex multiple thread function");
     print_consumed_time_wrapper(test_vector, multiple_threads_function_cond_var, "condition variable multiple thread function");
+  */
+    std::thread t_even(print_even);
+    std::thread t_odd(print_odd);
+
+    t_even.join();
+    t_odd.join();
+
     return 0;
+}
+
+void print_even() 
+{
+	for(; counter < LOOP_COUNTER;)
+	{
+        if(counter % 2 == 0)
+        {
+            std::cout << std::this_thread::get_id() << " " << counter << std::endl;
+        }
+        ++counter;
+	}
+}
+
+void print_odd() 
+{
+	for(; counter < LOOP_COUNTER;)
+	{
+        if(counter % 2 != 0)
+        {
+            std::cout << std::this_thread::get_id() << " " << counter << std::endl;
+        }
+        ++counter;
+	}
 }
 
 std::vector<double> create_test_vector() 
@@ -40,7 +78,7 @@ std::vector<double> create_test_vector()
 
 void single_thread_function(const std::vector<double>& test_vector)
 {
-    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+
 }
 
 void multiple_threads_function_mutex(const std::vector<double>& test_vector)

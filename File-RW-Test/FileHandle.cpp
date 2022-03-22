@@ -1,13 +1,11 @@
 #include "FileHandle.h"
 
-FileHandle::FileHandle(const std::string& filename) 
+FileHandle::FileHandle(const std::string& new_filename):filename(new_filename) 
 {
-    file.open(filename);
 }
 
-FileHandle::~FileHandle() 
+FileHandle::~FileHandle()
 {
-    if(file.is_open())
-        file.close();
 }
+
 
