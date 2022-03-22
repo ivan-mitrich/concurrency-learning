@@ -1,11 +1,15 @@
+#include <cmath>
 #include <iostream>
 #include <thread>
 #include <mutex>
 #include <vector>
 #include <fstream>
 #include <chrono>
+#include <condition_variable>
 #include "Timer.h"
 #include "FileHandle.h"
+
+
 
 void single_thread_function(const std::vector<double>& test_vector);
 void multiple_threads_function_mutex(const std::vector<double>& test_vector);
@@ -19,10 +23,16 @@ void print_consumed_time_wrapper(
         );
 
 std::mutex mutex;
+std::condition_variable cond_var;
 int counter = 0;
 const int LOOP_COUNTER = 10;
+std::vector<int> que;
 void print_even();
 void print_odd();
+
+void cond_var_producer();
+void cond_var_consumer();
+
 
 int main()
 {
@@ -32,8 +42,8 @@ int main()
     print_consumed_time_wrapper(test_vector, multiple_threads_function_cond_var, "condition variable multiple thread function");
   */
     //trying to print even/odd numbers in different threads in turn
-    std::thread t_even(print_even);
-    std::thread t_odd(print_odd);
+    std::thread t_even(cond_var_producer);
+    std::thread t_odd(cond_var_consumer);
 
     t_even.join();
     t_odd.join();
@@ -68,6 +78,20 @@ void print_odd()
             mutex.unlock();
     	}
 	}
+}
+
+void cond_var_producer(){
+    for(int i = 0; i < LOOP_COUNTER; ++i)
+    {
+	    
+    }
+}
+
+void cond_var_consumer(){
+	while(true)
+    {
+	
+    }
 }
 
 std::vector<double> create_test_vector() 
