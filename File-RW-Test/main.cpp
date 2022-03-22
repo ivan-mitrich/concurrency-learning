@@ -31,6 +31,7 @@ int main()
     print_consumed_time_wrapper(test_vector, multiple_threads_function_mutex, "mutex multiple thread function");
     print_consumed_time_wrapper(test_vector, multiple_threads_function_cond_var, "condition variable multiple thread function");
   */
+    //trying to print even/odd numbers in different threads in turn
     std::thread t_even(print_even);
     std::thread t_odd(print_odd);
 
@@ -46,21 +47,26 @@ void print_even()
 	{
         if(counter % 2 == 0)
         {
-            std::cout << std::this_thread::get_id() << " " << counter << std::endl;
-        }
-        ++counter;
-	}
+            mutex.lock();
+            std::cout << "EVEN THREAD : "  << std::this_thread::get_id() << " " << counter << std::endl;
+            ++counter;
+            mutex.unlock();
+
+    	}
+    }
 }
 
 void print_odd() 
 {
 	for(; counter < LOOP_COUNTER;)
-	{
+    {
         if(counter % 2 != 0)
         {
-            std::cout << std::this_thread::get_id() << " " << counter << std::endl;
-        }
-        ++counter;
+            mutex.lock();
+            std::cout << "ODD THREAD : "  << std::this_thread::get_id() << " " << counter << std::endl;
+            ++counter;
+            mutex.unlock();
+    	}
 	}
 }
 
