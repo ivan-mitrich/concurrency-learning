@@ -4,7 +4,7 @@ set(PROJECT_NAME File_RW_Test)
 
 project(${PROJECT_NAME})
 
-add_executable(${PROJECT_NAME} main.cpp  simple_mutex_producer_consumer.cpp)
+add_executable(${PROJECT_NAME} main.cpp  simple_mutex_producer_consumer.cpp FixedIntBuffer.cpp)
 
 set(CMAKE_CXX_FLAGS "-std=c++11 -pthread -lpthread -Wl,--no-as-needed -Wall -Wextra -Wshadow")
 
