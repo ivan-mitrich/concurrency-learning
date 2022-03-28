@@ -61,3 +61,29 @@ void consumer(ThreadsafeBuffer& buffer)
 		}
 	}
 }
+
+/*
+	Possible output:
+
+	ID#12748 produces 0
+	ID#12748 produces 1
+	ID#12748 produces 2
+	ID#12748 produces 3
+	ID#12748 produces 4
+	ID#12748 produces 5
+	ID#12748 produces 6
+	ID#12748 produces 0
+	ID#10048 consumes 1
+	ID#10048 consumes 2
+	ID#10048 consumes 3
+	ID#10048 consumes 4
+	ID#10048 consumes 5
+	ID#10048 consumes 6
+	ID#12748 produces 7
+	ID#12748 produces 8
+	ID#12748 produces 9
+	ID#10048 consumes 7
+	ID#10048 consumes 8
+	ID#10048 consumes 9
+
+*/
