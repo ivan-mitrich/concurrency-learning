@@ -4,13 +4,22 @@
 #include <string>
 #include <iostream>
 
-const std::size_t PRODUCER_STORAGE_CAPACITY = 1;
-const int PRODUCED_DATA_AMOUNT = 10;
-bool more_data_to_produce = true;
-std::mutex print_info_mutex;
+// threadsafe buffer size
+const std::size_t PRODUCER_STORAGE_CAPACITY = 7;
 
+// how many data to create
+const int PRODUCED_DATA_AMOUNT = 10;
+
+// flag is used to let consumer get all produced data if consumer works faster than producer
+bool more_data_to_produce = true;
+
+// simple function to create data
 int create_data();
+
+// producer function
 void producer(ThreadsafeBuffer& buffer);
+
+// consumer function
 void consumer(ThreadsafeBuffer& buffer);
 
 int main()
@@ -44,6 +53,8 @@ void consumer(ThreadsafeBuffer& buffer)
 	while (true)
 	{
 		int data_to_process = buffer.pop();
+		
+		// buffer.empty() check is used to let consume last data chunk
 		if (!more_data_to_produce && buffer.empty())
 		{
 			break;
