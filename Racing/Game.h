@@ -6,6 +6,11 @@
 
 /*
 * Main class to handle gameplay events such as player input, objects moving, collisions ...
+*
+* Gameplay : 
+* player controls the player_car created at the bottom of the screen when game starts.
+* During the game player tries to avoid obstacles moving down from the top of the screen.
+* These obstacles are spawned randomly at the top of the screen. They have different sizes and velocities.
 */
 
 class Game
